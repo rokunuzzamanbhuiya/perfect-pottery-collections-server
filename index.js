@@ -25,6 +25,9 @@ async function run() {
     await client.connect();
     const database = client.db("pottery_services");
     const servicesCollection = database.collection("services");
+    const usersCollection = database.collection("users");
+    const ordersCollection = database.collection("orders");
+    const reviewsCollection = database.collection("reviews");
 
     // GET API
     app.get("/services", async (req, res) => {
@@ -59,9 +62,25 @@ async function run() {
       const result = await servicesCollection.deleteOne(query);
       res.json(result);
     });
+
+    //review
+    app.post("/addreview", async (req, res) => {
+      const result = await reviewsCollection.insertOne(req.body);
+      res.send(result);
+    });
+
+     app.get("/reviews", async (req, res) => {
+       const cursor = reviewsCollection.find({});
+       const reviews = await cursor.toArray();
+       res.send(reviews);
+     });
+
+
   } finally {
     // await client.close();
   }
+
+ 
 }
 run().catch(console.dir);
 
