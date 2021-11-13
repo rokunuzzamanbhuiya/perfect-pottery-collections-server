@@ -1,9 +1,9 @@
-# Website Name: [Perfect Pottery Collections](https://trusted-tourism.web.app/).
+# Website Name: [Perfect Pottery Collections](https://perfect-pottery-collections.web.app/).
 
-## Website Link: [Perfect Pottery Collections](https://trusted-tourism.web.app/).
+## Website Link: [Perfect Pottery Collections](https://perfect-pottery-collections.web.app/).
 
 ## About Perfect Pottery Collections:
-Perfect Pottery Collections comes in both a print and a digital version, but its website also has plenty of helpful information for those who love pottery. Art Show praises it for its helpful reference articles. It also includes a section for classified ads, a guide to pottery classes by state, and a shopping section with videos, guides, and teaching materials. You can buy nice pottery from our website.
+Perfect Pottery Collections comes in both a print and a digital version, but its website also has plenty of helpful information for those who love pottery. Art show praises it for its helpful reference articles. It also includes a section for classified ads, a guide to pottery classes by state, and a shopping section with videos, guides, and teaching materials. You can buy nice pottery from our website.
 
 ## Our Services And Facilities:
 

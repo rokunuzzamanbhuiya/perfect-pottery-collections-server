@@ -55,6 +55,15 @@ async function run() {
       res.json(result);
     });
 
+
+
+    //  app.post("/addServices", async (req, res) => {
+    //    console.log(req.body);
+    //    const result = await servicesCollection.insertOne(req.body);
+    //    res.send(result);
+    //  });
+
+
     // DELETE API
     app.delete("/services/:id", async (req, res) => {
       const id = req.params.id;
@@ -70,13 +79,51 @@ async function run() {
     });
 
     // get reviews
-     app.get("/reviews", async (req, res) => {
-       const cursor = reviewsCollection.find({});
-       const reviews = await cursor.toArray();
-       res.send(reviews);
-     });
+    app.get("/reviews", async (req, res) => {
+      const cursor = reviewsCollection.find({});
+      const reviews = await cursor.toArray();
+      res.send(reviews);
+    });
+
+    //add users info
+    app.post("/addUserInfo", async (req, res) => {
+      console.log("req.body");
+      const result = await usersCollection.insertOne(req.body);
+      res.send(result);
+      console.log(result);
+    });
+
+    //  make admin
+    app.put("/makeadmin", async (req, res) => {
+      const filter = { email: req.body.email };
+      const result = await usersCollection.find(filter).toArray();
+      if (result) {
+        const documents = await usersCollection.updateOne(filter, {
+          $set: { role: "admin" },
+        });
+        console.log(documents);
+      }
+      // else {
+      //   const role = "admin";
+      //   const result3 = await usersCollection.insertOne(req.body.email, {
+      //     role: role,
+      //   });
+      // }
+
+      // console.log(result);
+    });
+
+    // check admin or not
+    app.get("/checkAdmin/:email", async (req, res) => {
+      const result = await usersCollection
+        .find({ email: req.params.email })
+        .toArray();
+      console.log(result);
+      res.send(result);
+    });
 
 
+    
   } finally {
     // await client.close();
   }
