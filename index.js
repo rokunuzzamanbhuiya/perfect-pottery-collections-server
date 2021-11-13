@@ -29,14 +29,14 @@ async function run() {
     const ordersCollection = database.collection("orders");
     const reviewsCollection = database.collection("reviews");
 
-    // GET API
+    // get services
     app.get("/services", async (req, res) => {
       const cursor = servicesCollection.find({});
       const services = await cursor.toArray();
       res.send(services);
     });
 
-    // GET Single Service
+    // get Single Service
     app.get("/services/:id", async (req, res) => {
       const id = req.params.id;
       console.log("getting specific service", id);
@@ -45,26 +45,23 @@ async function run() {
       res.json(service);
     });
 
-    // POST API
+    //add servicesCollection
+    app.post("/addnewservices", async (req, res) => {
+      console.log(req.body);
+      const result = await servicesCollection.insertOne(req.body);
+      res.send(result);
+    });
+
+    // post services
     app.post("/services", async (req, res) => {
       const service = req.body;
       console.log("hit the post api", service);
-
       const result = await servicesCollection.insertOne(service);
       console.log(result);
       res.json(result);
     });
 
-
-
-    //  app.post("/addServices", async (req, res) => {
-    //    console.log(req.body);
-    //    const result = await servicesCollection.insertOne(req.body);
-    //    res.send(result);
-    //  });
-
-
-    // DELETE API
+    // delete services
     app.delete("/services/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -72,17 +69,17 @@ async function run() {
       res.json(result);
     });
 
-    //review
-    app.post("/addreview", async (req, res) => {
-      const result = await reviewsCollection.insertOne(req.body);
-      res.send(result);
-    });
-
     // get reviews
     app.get("/reviews", async (req, res) => {
       const cursor = reviewsCollection.find({});
       const reviews = await cursor.toArray();
       res.send(reviews);
+    });
+
+    //add review
+    app.post("/addreview", async (req, res) => {
+      const result = await reviewsCollection.insertOne(req.body);
+      res.send(result);
     });
 
     //add users info
@@ -103,14 +100,6 @@ async function run() {
         });
         console.log(documents);
       }
-      // else {
-      //   const role = "admin";
-      //   const result3 = await usersCollection.insertOne(req.body.email, {
-      //     role: role,
-      //   });
-      // }
-
-      // console.log(result);
     });
 
     // check admin or not
@@ -121,9 +110,6 @@ async function run() {
       console.log(result);
       res.send(result);
     });
-
-
-    
   } finally {
     // await client.close();
   }
